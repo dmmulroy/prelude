@@ -175,11 +175,6 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 
+# direnv
+.direnv
 
-echo "# prelude" >> README.md
-git init
-git add -A
-git commit -m "batman"
-git branch -M main
-git remote add origin git@github.com:dmmulroy/prelude.git
-git push -u origin main

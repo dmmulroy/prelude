@@ -1,0 +1,43 @@
+{
+  "name": "@dmmulroy/prelude",
+  "version": "0.0.1",
+  "description": "A grab bag of types and utilities I find useful",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmmulroy/prelude.git"
+  },
+  "author": "Dillon Mulroy <dillon.mulroy@gmail.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "publish-patch": "npm run build && npm version patch && npm publish",
+    "build": "tsup",
+    "lint": "tsc",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/bun": "latest",
+    "tsup": "^8.1.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "sloth-pipe": "^0.0.7"
+  },
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/dmmulroy/prelude-ts/issues"
+  },
+  "homepage": "https://github.com/dmmulroy/prelude-ts#readme"
+}

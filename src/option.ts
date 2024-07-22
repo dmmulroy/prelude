@@ -152,11 +152,14 @@ class Some<A> {
   }
 
   /**
-   * Unwraps the value contained in Some.
+   * Unwraps the value contained in the `Option`, throwing an error with the
+   * provided message if the value is `None`.
+   *
+   * @param {string} [_message] - The message for the error (optional).
    *
    * @returns {A} The contained value.
    */
-  unwrap(): A {
+  unwrap(_message?: string): A {
     return this.value;
   }
 
@@ -241,12 +244,15 @@ class None {
   }
 
   /**
-   * Unwraps the value contained in None, throwing an error since this is None.
+   * Unwraps the value contained in the `Option`, throwing an error with the
+   * provided message if the value is `None`.
    *
-   * @throws {Error} An error indicating that the option is None.
+   * @param {string} [message] - The message for the error (optional).
+   *
+   * @returns {A} The contained value.
    */
-  unwrap(): never {
-    throw new UnwrapError("Option is none");
+  unwrap(message?: string): never {
+    throw new UnwrapError(message ?? "Option is none");
   }
 
   /**

@@ -192,11 +192,14 @@ class Ok<A> {
   }
 
   /**
-   * Unwraps the value contained in the `Ok`.
+   * Unwraps the value contained in the `Result`, throwing an error with the
+   * provided message if the value is an `Err`.
    *
-   * @returns {A} The contained value.
+   * @param {string} [_message] - The message for the error (optional).
+   *
+   * @throws {Error} An error indicating that the result is `Err`.
    */
-  unwrap(): A {
+  unwrap(_message?: string): A {
     return this.value;
   }
 
@@ -320,8 +323,8 @@ class Err<E> {
   }
 
   /**
-   * Unwraps the value contained in the `Err`, throwing an error with the
-   * provided message.
+   * Unwraps the value contained in the `Result`, throwing an error with the
+   * provided message if the value is an `Err`.
    *
    * @param {string} [message] - The message for the error (optional).
    *

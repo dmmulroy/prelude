@@ -3,7 +3,7 @@ export abstract class TaggedError extends Error {
 }
 
 export function isTaggedError(error: Error): error is TaggedError {
-  if ("_tag" in error) {
+  if (error instanceof TaggedError) {
     return true;
   }
 

@@ -1,3 +1,5 @@
+import { TaggedError } from "./error";
+
 /**
  * Represents a type that can either be a successful result (Ok) or an error
  * result (Err).
@@ -63,9 +65,13 @@ export const Result = {
   },
 };
 
-export class UnwrapError extends Error {}
+export class UnwrapError extends TaggedError {
+  readonly _tag = "UnwrapError" as const;
+}
 
-export class TryCatchError extends Error {
+export class TryCatchError extends TaggedError {
+  readonly _tag = "TryCatchError" as const;
+
   constructor(options: ErrorOptions & { cause: unknown }) {
     super("TryCatchError", options);
   }

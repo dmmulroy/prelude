@@ -42,21 +42,35 @@ export const Result = {
    *
    * @template A - The type of the successful result.
    *
-   * @param {() => A | Promise<A>} fn - The function to execute. It can return a
-   * value or a promise that resolves to a value.
+   * @param {() => A} fn - The function to execute.
    *
-   * @returns {Result<A, TryCatchError> | Promise<Result<A, TryCatchError>>}
+   * @returns {Result<A, TryCatchError>}
    * A `Result` containing either the successful result or an error.
    */
-  try<A>(
-    fn: () => A | Promise<A>,
-  ): Result<A, TryCatchError> | Promise<Result<A, TryCatchError>> {
+  try<A>(fn: () => A): Result<A, TryCatchError> {
     try {
       const result = fn();
 
-      if (result instanceof Promise) {
-        return result.then(Result.ok);
-      }
+      return Result.ok(result);
+    } catch (error) {
+      return Result.err(new TryCatchError({ cause: error }));
+    }
+  },
+
+  /**
+   * Attempts to execute a async function and captures any errors that occur,
+   * returning a `Result` type.
+   *
+   * @template A - The type of the successful result.
+   *
+   * @param {() => Promise<A>} fn - The function to execute.
+   *
+   * @returns {Promise<Result<A, TryCatchError>>} A `Result` containing either
+   * the successful result or an error.
+   */
+  async asyncTry<A>(fn: () => Promise<A>): Promise<Result<A, TryCatchError>> {
+    try {
+      const result = await fn();
 
       return Result.ok(result);
     } catch (error) {
